@@ -4,10 +4,10 @@ import VideoCard from "./VideoCard";
 
 export default function CategoryRow({ category }: { category: Category }) {
   return (
-    <section className="py-5">
+    <section className="py-6 cat-divider">
       <div className="max-w-[1400px] mx-auto px-4">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-bold flex items-center gap-2">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold flex items-center gap-2">
             <span>{category.icon}</span>
             <span>{category.name}</span>
           </h2>

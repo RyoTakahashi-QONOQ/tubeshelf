@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVideoById, formatViews } from "@/data/mock";
 import VideoPlayer from "@/components/VideoPlayer";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export async function generateMetadata({
   params,
@@ -42,7 +43,10 @@ export default async function VideoPage({
         <div className="lg:col-span-2">
           <VideoPlayer youtubeId={video.youtubeId} />
           <div className="mt-4">
-            <h1 className="text-xl font-bold leading-7">{video.title}</h1>
+            <div className="flex items-start justify-between gap-3">
+              <h1 className="text-xl font-bold leading-7">{video.title}</h1>
+              <FavoriteButton videoId={video.id} size="md" />
+            </div>
             <div className="mt-2 flex items-center gap-3 text-sm text-muted">
               <span>{video.channel}</span>
               <span>・</span>

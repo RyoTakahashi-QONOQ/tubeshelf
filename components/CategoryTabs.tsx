@@ -18,14 +18,14 @@ export default function CategoryTabs({
     <div>
       <div
         ref={tabsRef}
-        className="sticky top-14 z-40 bg-background border-b border-border overflow-x-auto hide-scrollbar"
+        className="sticky top-14 z-40 bg-background/95 backdrop-blur-sm border-b border-border overflow-x-auto hide-scrollbar"
       >
         <div className="flex">
           {categories.map((cat, i) => (
             <button
               key={cat.slug}
               onClick={() => setActiveIndex(i)}
-              className={`shrink-0 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+              className={`shrink-0 px-4 py-2.5 text-sm font-semibold border-b-2 transition-colors ${
                 i === activeIndex
                   ? "border-primary text-primary"
                   : "border-transparent text-muted hover:text-foreground"
