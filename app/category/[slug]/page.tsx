@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories, getCategoryBySlug, formatViews } from "@/data/mock";
+import { categories, getCategoryBySlug, formatViews, formatRelativeDate } from "@/data/mock";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
@@ -49,31 +50,37 @@ export default async function CategoryPage({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {category.videos.map((video) => (
-          <Link
-            key={video.id}
-            href={`/video/${video.id}`}
-            className="group block"
-          >
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-surface">
-              <img
-                src={video.thumbnail}
-                alt={video.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <span className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
-                {video.duration}
-              </span>
+          <div key={video.id} className="group relative">
+            <Link href={`/video/${video.id}`} className="block">
+              <div className="relative aspect-video rounded-lg overflow-hidden bg-surface border border-border card-glow">
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="play-overlay">
+                  <svg className="w-12 h-12 text-white/90" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <span className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
+                  {video.duration}
+                </span>
+              </div>
+              <div className="mt-2.5">
+                <h3 className="text-sm font-medium leading-5 line-clamp-2 group-hover:text-primary transition-colors">
+                  {video.title}
+                </h3>
+                <p className="mt-1 text-xs text-muted">{video.channel}</p>
+                <p className="text-xs text-muted">
+                  {formatViews(video.views)} ・ {formatRelativeDate(video.publishedAt)}
+                </p>
+              </div>
+            </Link>
+            <div className="absolute top-1.5 right-1.5">
+              <FavoriteButton videoId={video.id} />
             </div>
-            <div className="mt-2.5">
-              <h3 className="text-sm font-medium leading-5 line-clamp-2 group-hover:text-primary transition-colors">
-                {video.title}
-              </h3>
-              <p className="mt-1 text-xs text-muted">{video.channel}</p>
-              <p className="text-xs text-muted">
-                {formatViews(video.views)} ・ {video.publishedAt}
-              </p>
-            </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

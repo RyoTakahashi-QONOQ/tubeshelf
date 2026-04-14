@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Video } from "@/lib/types";
-import { formatViews } from "@/data/mock";
+import { formatViews, formatRelativeDate } from "@/data/mock";
 import FavoriteButton from "./FavoriteButton";
 
 export default function VideoCard({ video }: { video: Video }) {
@@ -33,7 +33,7 @@ export default function VideoCard({ video }: { video: Video }) {
         </h3>
         <p className="mt-1 text-xs text-muted">{video.channel}</p>
         <p className="text-xs text-muted">
-          {formatViews(video.views)} ・ {video.publishedAt}
+          {formatViews(video.views)} ・ {formatRelativeDate(video.publishedAt)}
         </p>
       </div>
     </Link>
