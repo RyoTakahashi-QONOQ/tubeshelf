@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getVideoById, formatViews } from "@/data/mock";
+import { getVideoById } from "@/lib/data";
+import { formatViews } from "@/lib/utils";
 import DateDisplay from "@/components/DateDisplay";
 import VideoPlayer from "@/components/VideoPlayer";
 import FavoriteButton from "@/components/FavoriteButton";
+
+export const revalidate = 21600;
 
 export async function generateMetadata({
   params,
@@ -11,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const result = getVideoById(id);
+  const result = await getVideoById(id);
   if (!result) return { title: "動画が見つかりません" };
   return {
     title: `${result.title} | TubeShelf`,
@@ -25,7 +28,7 @@ export default async function VideoPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const result = getVideoById(id);
+  const result = await getVideoById(id);
   if (!result) notFound();
 
   const { category, ...video } = result;

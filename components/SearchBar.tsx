@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { searchVideos, formatViews } from "@/data/mock";
+import { searchVideos } from "@/data/mock";
+import { formatViews } from "@/lib/utils";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");

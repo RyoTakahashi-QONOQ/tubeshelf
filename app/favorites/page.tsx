@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useFavorites } from "@/lib/favorites-context";
-import { getVideoById, formatViews } from "@/data/mock";
+import { getVideoById } from "@/data/mock";
+import { formatViews } from "@/lib/utils";
 import DateDisplay from "@/components/DateDisplay";
 import FavoriteButton from "@/components/FavoriteButton";
 

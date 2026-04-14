@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Video } from "@/lib/types";
-import { formatViews } from "@/data/mock";
+import { formatViews } from "@/lib/utils";
 import FavoriteButton from "./FavoriteButton";
 import DateDisplay from "./DateDisplay";
 

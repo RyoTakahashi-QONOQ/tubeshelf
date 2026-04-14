@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories, getCategoryBySlug, formatViews } from "@/data/mock";
+import { getCategories, getCategoryBySlug } from "@/lib/data";
+import { formatViews } from "@/lib/utils";
 import FavoriteButton from "@/components/FavoriteButton";
 import DateDisplay from "@/components/DateDisplay";
 
-export function generateStaticParams() {
+export const revalidate = 21600;
+
+export async function generateStaticParams() {
+  const categories = await getCategories();
   return categories.map((c) => ({ slug: c.slug }));
 }
 
@@ -14,7 +18,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug);
   if (!category) return { title: "カテゴリが見つかりません" };
   return {
     title: `${category.icon} ${category.name} | TubeShelf`,
@@ -28,7 +32,7 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug);
   if (!category) notFound();
 
   return (

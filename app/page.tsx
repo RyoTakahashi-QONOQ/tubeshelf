@@ -1,9 +1,13 @@
-import { categories } from "@/data/mock";
+import { getCategories } from "@/lib/data";
 import CategoryRow from "@/components/CategoryRow";
 import CategoryTabs from "@/components/CategoryTabs";
 import AdBanner from "@/components/AdBanner";
 
-export default function Home() {
+export const revalidate = 21600; // 6 hours
+
+export default async function Home() {
+  const categories = await getCategories();
+
   return (
     <>
       {/* PC: vertical carousel rows */}
