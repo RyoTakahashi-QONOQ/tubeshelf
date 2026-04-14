@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories, getCategoryBySlug, formatViews, formatRelativeDate } from "@/data/mock";
+import { categories, getCategoryBySlug, formatViews } from "@/data/mock";
 import FavoriteButton from "@/components/FavoriteButton";
+import DateDisplay from "@/components/DateDisplay";
 
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
@@ -73,7 +74,7 @@ export default async function CategoryPage({
                 </h3>
                 <p className="mt-1 text-xs text-muted">{video.channel}</p>
                 <p className="text-xs text-muted">
-                  {formatViews(video.views)} ・ {formatRelativeDate(video.publishedAt)}
+                  {formatViews(video.views)} ・ <DateDisplay date={video.publishedAt} />
                 </p>
               </div>
             </Link>

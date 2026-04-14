@@ -33,7 +33,11 @@ export default function Header() {
               />
             </svg>
           </Link>
-          <button className="p-2 rounded-full hover:bg-surface-hover transition-colors">
+          <Link
+            href="/settings"
+            className="p-2 rounded-full hover:bg-surface-hover transition-colors"
+            aria-label="設定"
+          >
             <svg
               className="w-5 h-5 text-muted"
               fill="none"
@@ -53,7 +57,7 @@ export default function Header() {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </header>

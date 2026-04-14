@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useFavorites } from "@/lib/favorites-context";
-import { getVideoById, formatViews, formatRelativeDate } from "@/data/mock";
+import { getVideoById, formatViews } from "@/data/mock";
+import DateDisplay from "@/components/DateDisplay";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export default function FavoritesPage() {
@@ -90,7 +91,7 @@ export default function FavoritesPage() {
                     </h3>
                     <p className="mt-1 text-xs text-muted">{video.channel}</p>
                     <p className="text-xs text-muted">
-                      {formatViews(video.views)} ・ {formatRelativeDate(video.publishedAt)}
+                      {formatViews(video.views)} ・ <DateDisplay date={video.publishedAt} />
                     </p>
                   </div>
                 </Link>

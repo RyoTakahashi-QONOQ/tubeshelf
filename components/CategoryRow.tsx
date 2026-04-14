@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { Category } from "@/lib/types";
+import { useSettings } from "@/lib/settings-context";
 import VideoCard from "./VideoCard";
 
 export default function CategoryRow({ category }: { category: Category }) {
+  const { settings } = useSettings();
+
   return (
     <section className="py-6 cat-divider">
       <div className="max-w-[1400px] mx-auto px-4">
@@ -19,7 +24,7 @@ export default function CategoryRow({ category }: { category: Category }) {
           </Link>
         </div>
         <div className="flex gap-4 overflow-x-auto pb-3 hide-scrollbar">
-          {category.videos.slice(0, 8).map((video) => (
+          {category.videos.slice(0, settings.cardsPerRow).map((video) => (
             <VideoCard key={video.id} video={video} />
           ))}
         </div>

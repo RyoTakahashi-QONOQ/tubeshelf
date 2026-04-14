@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getVideoById, formatViews, formatRelativeDate } from "@/data/mock";
+import { getVideoById, formatViews } from "@/data/mock";
+import DateDisplay from "@/components/DateDisplay";
 import VideoPlayer from "@/components/VideoPlayer";
 import FavoriteButton from "@/components/FavoriteButton";
 
@@ -52,7 +53,7 @@ export default async function VideoPage({
               <span>・</span>
               <span>{formatViews(video.views)}</span>
               <span>・</span>
-              <span>{formatRelativeDate(video.publishedAt)}</span>
+              <DateDisplay date={video.publishedAt} />
             </div>
             <p className="mt-4 text-sm text-muted leading-6 border-t border-border pt-4">
               {video.description}
